@@ -6,8 +6,8 @@ import { Category, SortOption } from './types';
 const options: SortOption[] = [
   { id: 1, title: 'Most expensive', type: 'price', ascending: false },
   { id: 2, title: 'Least expensive', type: 'price', ascending: true },
-  { id: 3, title: 'Most stared', type: 'rating', ascending: false },
-  { id: 4, title: 'Least stared', type: 'rating', ascending: true },
+  { id: 3, title: 'Most starred', type: 'rating', ascending: false },
+  { id: 4, title: 'Least starred', type: 'rating', ascending: true },
 ];
 
 function App() {
@@ -20,7 +20,9 @@ function App() {
       .then(res => res.json())
       .then(res =>
         setCategories(
-          res.slice(10).map((category: string, i: number) => ({ id: i, title: category }))
+          res
+            .slice(10)
+            .map((category: string, i: number) => ({ id: i, title: category }))
         )
       );
   }, []);
@@ -36,7 +38,8 @@ function App() {
         <div className="my-5">
           <h2>Products</h2>
           <div className="d-flex align-items-center mb-2">
-            <div className='me-1'>
+            <div className="d-flex align-items-center me-2">
+              <span className="me-1">Sort: </span>
               <Dropdown<SortOption>
                 onChange={option => setSelectedSort(option)}
                 value={selectedSort}
@@ -45,12 +48,15 @@ function App() {
               />
             </div>
             <div>
-              <Dropdown<Category>
-                onChange={option => setSelectedFilter(option)}
-                value={selectedFilter}
-                options={categories}
-                label="Filter by Category"
-              />
+              <div className='d-flex align-items-center'>
+                <span className="me-1">Filter: </span>
+                <Dropdown<Category>
+                  onChange={option => setSelectedFilter(option)}
+                  value={selectedFilter}
+                  options={categories}
+                  label="Filter by Category"
+                />
+              </div>
             </div>
           </div>
           <ProductList sort={selectedSort} filter={selectedFilter} />
