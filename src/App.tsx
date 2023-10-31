@@ -1,6 +1,18 @@
+import { useState } from 'react';
+import Dropdown from './components/Dropdown';
 import ProductList from './components/ProductList';
+import { SortOption } from './types';
+
+const options: SortOption[] = [
+  { id: 1, title: 'most expensive', type: 'price', ascending: false },
+  { id: 2, title: 'least expensive', type: 'price', ascending: true },
+  { id: 3, title: 'most stared', type: 'rating', ascending: true },
+  { id: 4, title: 'least stared', type: 'rating', ascending: false },
+];
 
 function App() {
+  const [selectedSort, setSelectedSort] = useState<SortOption>();
+
   return (
     <>
       <nav className="navbar navbar-light bg-light">
@@ -9,9 +21,17 @@ function App() {
         </div>
       </nav>
       <div className="container">
-        <div className='my-5'>
+        <div className="my-5">
           <h2>Products</h2>
-          <ProductList />
+          <div className="d-flex align-items-center mb-2">
+            <Dropdown<SortOption>
+              onChange={option => setSelectedSort(option)}
+              value={selectedSort}
+              options={options}
+              label="sort by"
+            />
+          </div>
+          <ProductList sort={selectedSort} />
         </div>
       </div>
     </>

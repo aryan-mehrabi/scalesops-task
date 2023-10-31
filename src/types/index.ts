@@ -11,3 +11,10 @@ export interface Product {
   thumbnail: string;
   images: string[];
 }
+
+export interface SortOption {
+  id: number;
+  title: string;
+  ascending: boolean;
+  type: keyof Product;
+}
