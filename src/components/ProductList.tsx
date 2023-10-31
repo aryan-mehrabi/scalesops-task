@@ -14,15 +14,19 @@ export default function ProductList({
   // You may wanna use react query since it supports caching but
   // for sake of this task im using useEffect here.
   useEffect(() => {
-    fetch('https://dummyjson.com/products')
+    fetch(
+      `https://dummyjson.com/products/${
+        filter ? `category/${filter.title}` : ''
+      }`
+    )
       .then(res => res.json())
       .then(json => setProducts(json.products));
-  }, []);
+  }, [filter]);
 
-  const filterProduct = (product : Product) => {
-    if (!filter) return true
-    return product.category === filter?.title
-  }
+  const filterProduct = (product: Product) => {
+    if (!filter) return true;
+    return product.category === filter?.title;
+  };
 
   const sortProduct = (a: Product, b: Product) => {
     if (sort) {

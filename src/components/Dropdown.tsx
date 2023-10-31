@@ -22,7 +22,7 @@ export default function Dropdown<T extends { id: number; title: string }>({
   return (
     <div className="dropdown">
       <button
-        className="btn btn-secondary btn-sm dropdown-toggle"
+        className="btn btn-primary btn-sm dropdown-toggle"
         type="button"
         data-bs-toggle="dropdown"
         aria-expanded="false"

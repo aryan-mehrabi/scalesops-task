@@ -20,7 +20,7 @@ function App() {
       .then(res => res.json())
       .then(res =>
         setCategories(
-          res.map((category: string, i: number) => ({ id: i, title: category }))
+          res.slice(10).map((category: string, i: number) => ({ id: i, title: category }))
         )
       );
   }, []);
