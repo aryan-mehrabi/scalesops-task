@@ -2,9 +2,19 @@ import ProductList from './components/ProductList';
 
 function App() {
   return (
-    <div className="container">
-      <ProductList />
-    </div>
+    <>
+      <nav className="navbar navbar-light bg-light">
+        <div className="container">
+          <span className="navbar-brand mb-0 h1">ScalesOps Task</span>
+        </div>
+      </nav>
+      <div className="container">
+        <div className='my-5'>
+          <h2>Products</h2>
+          <ProductList />
+        </div>
+      </div>
+    </>
   );
 }
 
