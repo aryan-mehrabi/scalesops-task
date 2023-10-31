@@ -6,7 +6,7 @@ interface PropTypes {
 export default function ProductListItem({ product }: PropTypes) {
   const { title, description, price, images } = product;
   return (
-    <div className="col-md-4 col-lg-3 d-flex my-3">
+    <div className="col">
       <div className="card">
         <img
           className="card-img-top h-16"
