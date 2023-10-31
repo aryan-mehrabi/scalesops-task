@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { type Product } from '../types';
+import ProductListItem from './ProductListItem';
 
 export default function ProductList() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -11,8 +12,8 @@ export default function ProductList() {
   }, []);
 
   const renderProducts = () => {
-    return products.map(product => <div key={product.id}>{product.title}</div>);
+    return products.map(product => <ProductListItem {...{ product }} />);
   };
 
-  return <div>{renderProducts()}</div>;
+  return <div className="row">{renderProducts()}</div>;
 }
