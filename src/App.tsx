@@ -37,7 +37,7 @@ function App() {
       <div className="container">
         <div className="my-5">
           <h2>Products</h2>
-          <div className="d-flex align-items-center mb-2">
+          <div className="d-flex align-items-center my-3">
             <div className="d-flex align-items-center me-2">
               <span className="me-1">Sort: </span>
               <Dropdown<SortOption>
