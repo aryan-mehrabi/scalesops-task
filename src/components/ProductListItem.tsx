@@ -7,7 +7,7 @@ export default function ProductListItem({ product }: PropTypes) {
   const { title, description, price, images } = product;
   return (
     <div className="col">
-      <div className="card">
+      <div className="card h-100">
         <img
           className="card-img-top h-16"
           src={images[0]}
