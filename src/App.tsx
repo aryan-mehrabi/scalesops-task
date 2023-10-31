@@ -2,7 +2,9 @@ import ProductList from './components/ProductList';
 
 function App() {
   return (
-    <ProductList />
+    <div className="container">
+      <ProductList />
+    </div>
   );
 }
 
