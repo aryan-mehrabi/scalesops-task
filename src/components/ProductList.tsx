@@ -14,7 +14,9 @@ export default function ProductList() {
   }, []);
 
   const renderProducts = () => {
-    return products.map(product => <ProductListItem {...{ product }} />);
+    return products.map(product => (
+      <ProductListItem key={product.id} {...{ product }} />
+    ));
   };
 
   return <div className="row">{renderProducts()}</div>;
