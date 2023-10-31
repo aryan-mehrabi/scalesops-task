@@ -18,3 +18,8 @@ export interface SortOption {
   ascending: boolean;
   type: keyof Product;
 }
+
+export interface Category {
+  id: number;
+  title: string;
+}

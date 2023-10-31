@@ -1,17 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Dropdown from './components/Dropdown';
 import ProductList from './components/ProductList';
-import { SortOption } from './types';
+import { Category, SortOption } from './types';
 
 const options: SortOption[] = [
-  { id: 1, title: 'most expensive', type: 'price', ascending: false },
-  { id: 2, title: 'least expensive', type: 'price', ascending: true },
-  { id: 3, title: 'most stared', type: 'rating', ascending: true },
-  { id: 4, title: 'least stared', type: 'rating', ascending: false },
+  { id: 1, title: 'Most expensive', type: 'price', ascending: false },
+  { id: 2, title: 'Least expensive', type: 'price', ascending: true },
+  { id: 3, title: 'Most stared', type: 'rating', ascending: false },
+  { id: 4, title: 'Least stared', type: 'rating', ascending: true },
 ];
 
 function App() {
   const [selectedSort, setSelectedSort] = useState<SortOption>();
+  const [selectedFilter, setSelectedFilter] = useState<Category>();
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    fetch('https://dummyjson.com/products/categories')
+      .then(res => res.json())
+      .then(res =>
+        setCategories(
+          res.map((category: string, i: number) => ({ id: i, title: category }))
+        )
+      );
+  }, []);
 
   return (
     <>
@@ -24,14 +36,24 @@ function App() {
         <div className="my-5">
           <h2>Products</h2>
           <div className="d-flex align-items-center mb-2">
-            <Dropdown<SortOption>
-              onChange={option => setSelectedSort(option)}
-              value={selectedSort}
-              options={options}
-              label="sort by"
-            />
+            <div className='me-1'>
+              <Dropdown<SortOption>
+                onChange={option => setSelectedSort(option)}
+                value={selectedSort}
+                options={options}
+                label="Sort by"
+              />
+            </div>
+            <div>
+              <Dropdown<Category>
+                onChange={option => setSelectedFilter(option)}
+                value={selectedFilter}
+                options={categories}
+                label="Filter by Category"
+              />
+            </div>
           </div>
-          <ProductList sort={selectedSort} />
+          <ProductList sort={selectedSort} filter={selectedFilter} />
         </div>
       </div>
     </>

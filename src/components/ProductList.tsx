@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import { SortOption, type Product } from '../types';
+import { SortOption, type Product, Category } from '../types';
 import ProductListItem from './ProductListItem';
 
 export default function ProductList({
   sort,
+  filter,
 }: {
   sort: SortOption | undefined;
+  filter: Category | undefined;
 }) {
   const [products, setProducts] = useState<Product[]>([]);
 
@@ -16,6 +18,11 @@ export default function ProductList({
       .then(res => res.json())
       .then(json => setProducts(json.products));
   }, []);
+
+  const filterProduct = (product : Product) => {
+    if (!filter) return true
+    return product.category === filter?.title
+  }
 
   const sortProduct = (a: Product, b: Product) => {
     if (sort) {
@@ -28,6 +35,7 @@ export default function ProductList({
 
   const renderProducts = () => {
     return products
+      .filter(filterProduct)
       .sort(sortProduct)
       .map(product => <ProductListItem key={product.id} {...{ product }} />);
   };
