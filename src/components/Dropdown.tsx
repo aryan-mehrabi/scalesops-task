@@ -12,7 +12,7 @@ export default function Dropdown<T extends { id: number; title: string }>({
   const renderOptions = () => {
     return options.map(option => (
       <li key={option.id} onClick={() => onChange(option)}>
-        <a className="dropdown-item" href="#">
+        <a className={`dropdown-item ${option.id === value?.id ? "active" : ""}`} href="#">
           {option.title}
         </a>
       </li>
