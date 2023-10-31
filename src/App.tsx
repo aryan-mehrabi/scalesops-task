@@ -3,7 +3,7 @@ import Dropdown from './components/Dropdown';
 import ProductList from './components/ProductList';
 import { Category, SortOption } from './types';
 
-const options: SortOption[] = [
+const sortOptions: SortOption[] = [
   { id: 1, title: 'Most expensive', type: 'price', ascending: false },
   { id: 2, title: 'Least expensive', type: 'price', ascending: true },
   { id: 3, title: 'Most starred', type: 'rating', ascending: false },
@@ -43,7 +43,7 @@ function App() {
               <Dropdown<SortOption>
                 onChange={option => setSelectedSort(option)}
                 value={selectedSort}
-                options={options}
+                options={sortOptions}
                 label="Sort by"
               />
             </div>
